@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.ExceptionServices;
 using UnityEngine;
 
 public class ClientBehaviour : MonoBehaviour
@@ -37,6 +38,8 @@ public class ClientBehaviour : MonoBehaviour
         waitPos = GameObject.Find("WaitPos").transform;
         destroyerPos = GameObject.Find("DestroyerPos").transform;
         timeToWait = normalDistribution.GenerateRandomValue();
+
+        StartCoroutine(QueueWait());
     }
 
     // Update is called once per frame
@@ -135,6 +138,15 @@ public class ClientBehaviour : MonoBehaviour
         // Move client to the DestroyerPos and destroy the client
         transform.position = Vector3.MoveTowards(transform.position, new Vector3(destroyerPos.position.x, destroyerPos.position.y, destroyerPos.position.z), baseSpeed * Time.timeScale);
         if (transform.position == destroyerPos.position)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    IEnumerator QueueWait()
+    {
+        yield return new WaitForSeconds(30);
+        if (isOnWaitPos == false && isOnBox == false)
         {
             Destroy(gameObject);
         }

@@ -9,6 +9,13 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private BoxManager boxManager;
     public List<GameObject> boxesToActivate;
+    public Transform spawnPoint;
+    public GameObject client;
+    [SerializeField] float spawnTime = 1f; //timeframe variable
+    private float tempCounter = 0f; //timeframe temp variable
+    [SerializeField]
+    private bool isOpen = true;  
+    public float timeRemanining = 60*4; //timeframe variable
 
     // Start is called before the first frame update
     IEnumerator Start()
@@ -20,7 +27,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitUntil(() => boxManager.IsInitialized == true);
 
         boxesToActivate = boxManager.getBoxes(amountOfBoxes);
-        
+
         foreach (GameObject box in boxesToActivate)
         {
             // Get child of the box
@@ -40,6 +47,35 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // Open time management
+        if (timeRemanining <= 0)
+        {
+            timeRemanining = 0;
+            isOpen = false;
+        }
+        else
+        {
+            timeRemanining -= Time.deltaTime;
+        }
+
+        // Spawn time management
+        if (tempCounter <= 0f && isOpen)  //check if the counter equals 0
+        {
+            SpawnEnemy();  //spawn the object
+            tempCounter = spawnTime;  //reset the timer or cd
+        }
+        else
+        {
+            tempCounter -= Time.deltaTime;  //take down time 
+        }
+
+    }
+    private void SpawnEnemy()  //Spawn object (Enemy) function
+    {
+
+        if (Random.value <= 0.358)
+        {
+            Instantiate(client, spawnPoint.position, Quaternion.identity);
+        }
     }
 }
