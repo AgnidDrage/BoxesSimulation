@@ -146,12 +146,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseSpeed: 0.2
   waitPos: {fileID: 0}
+  destroyerPos: {fileID: 0}
   cl: {fileID: 1811926384163048024}
   bc: {fileID: 938603106442986087}
   gameManager: {fileID: 0}
-  isOnWaitPos: 0
+  normalDistribution: {fileID: 0}
   isOnBox: 0
   targetBox: {fileID: 0}
+  timeToWait: 0
 --- !u!1 &1480329942699148906
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,4 +220,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.3

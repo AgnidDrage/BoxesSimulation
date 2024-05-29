@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
 
-    public int amountOfBoxes = 5;
+    public int amountOfBoxes;
     [SerializeField]
     private BoxManager boxManager;
     public List<GameObject> boxesToActivate;
@@ -16,10 +17,19 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private bool isOpen = true;  
     public float timeRemanining = 60*4; //timeframe variable
+    public Text labelCountdown;
+    [SerializeField] private Dropdown timeVelocityDropdown;
+    public int lostClients = 0;
+    public int assistedClients = 0;
+    public int totalClients = 0;
+    public int clientCounter = 0;
 
     // Start is called before the first frame update
     IEnumerator Start()
     {
+        // Get the amount of boxes from the player prefs
+        amountOfBoxes = PlayerPrefs.GetInt("amountOfBoxes");
+
         // Limit the Amount of Boxes to max 10 and min 1
         amountOfBoxes = Mathf.Clamp(amountOfBoxes, 1, 10);
 
@@ -69,13 +79,55 @@ public class GameManager : MonoBehaviour
             tempCounter -= Time.deltaTime;  //take down time 
         }
 
+        // Calculate total clients
+        totalClients = lostClients + assistedClients;
+
+        // Check if the game is over
+        if (clientCounter == 0 && isOpen == false)
+        {
+            Debug.Log("Game Over");
+        }
+
     }
+
+    private void FixedUpdate() 
+    {
+        // Change the time velocity
+        switch (timeVelocityDropdown.value)
+        {
+            case 0:
+                Time.timeScale = 1;
+                break;
+            case 1:
+                Time.timeScale = 2;
+                break;
+            case 2:
+                Time.timeScale = 3;
+                break;
+            case 3:
+                Time.timeScale = 4;
+                break;
+            case 4:
+                Time.timeScale = 5;
+                break;
+        }
+
+    }
+
     private void SpawnEnemy()  //Spawn object (Enemy) function
     {
 
         if (Random.value <= 0.358)
         {
+            clientCounter++;
             Instantiate(client, spawnPoint.position, Quaternion.identity);
         }
     }
+
+    private void OnGUI()
+    {
+        labelCountdown.text = "Remaining time: " + timeRemanining.ToString("F0") + " minutes";
+    }
+
+
 }

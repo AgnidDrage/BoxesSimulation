@@ -96,7 +96,6 @@ public class ClientBehaviour : MonoBehaviour
             {
                 if (box.GetComponent<BoxBehaviour>().isActivated == true)
                 {
-                    Debug.Log("Box found");
                     // Set the box to be in use
                     targetBox = box;
                     targetBox.GetComponent<BoxBehaviour>().isActivated = false;
@@ -128,6 +127,8 @@ public class ClientBehaviour : MonoBehaviour
         yield return new WaitForSeconds((float)timeToWait);
         // Set the box to be activated
         targetBox.GetComponent<BoxBehaviour>().isActivated = true;
+        gameManager.assistedClients++;
+        gameManager.clientCounter--;
         timeToDie = true;
     }
 
@@ -149,6 +150,8 @@ public class ClientBehaviour : MonoBehaviour
         if (isOnWaitPos == false && isOnBox == false)
         {
             Destroy(gameObject);
+            gameManager.lostClients++;
+            gameManager.clientCounter--;
         }
     }
 }
