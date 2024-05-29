@@ -208,6 +208,8 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   totalMoneyBox: 0
   totalMoneyLostClient: 0
+  waitTimes: []
+  waitBoxes: []
 --- !u!4 &54828238
 Transform:
   m_ObjectHideFlags: 0
@@ -396,6 +398,7 @@ MonoBehaviour:
   assistedClients: 0
   totalClients: 0
   clientCounter: 0
+  metricsAnalyzer: {fileID: 54828237}
 --- !u!4 &251043220
 Transform:
   m_ObjectHideFlags: 0
@@ -1001,7 +1004,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 182, y: 208}
+  m_AnchoredPosition: {x: 182, y: 192.6}
   m_SizeDelta: {x: 210.4, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &929849364
@@ -1080,7 +1083,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -179, y: 210}
+  m_AnchoredPosition: {x: -179, y: 190.2}
   m_SizeDelta: {x: 425, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1038893213
@@ -1414,7 +1417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -2035,7 +2038,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 322, y: 214}
+  m_AnchoredPosition: {x: 322, y: 202.4}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1782777674

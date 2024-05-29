@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public int assistedClients = 0;
     public int totalClients = 0;
     public int clientCounter = 0;
+    public MetricsAnalyzer metricsAnalyzer;
 
     // Start is called before the first frame update
     IEnumerator Start()
@@ -83,9 +84,10 @@ public class GameManager : MonoBehaviour
         totalClients = lostClients + assistedClients;
 
         // Check if the game is over
-        if (clientCounter == 0 && isOpen == false)
+        if (clientCounter == 0 && isOpen == false || Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("Game Over");
+            metricsAnalyzer.SaveData();
+            UnityEngine.SceneManagement.SceneManager.LoadScene("EndSim");
         }
 
     }

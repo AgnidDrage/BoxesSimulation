@@ -20,4 +20,10 @@ public class MenuManager : MonoBehaviour
         // Load the game scene
         UnityEngine.SceneManagement.SceneManager.LoadScene("Simulation");
     }
+
+    public void Exit()
+    {
+        // Exit the application
+        Application.Quit();
+    }
 }

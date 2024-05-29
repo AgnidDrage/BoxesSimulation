@@ -22,6 +22,8 @@ public class ClientBehaviour : MonoBehaviour
     [SerializeField]
     private double timeToWait;
     private bool timeToDie = false;
+    public MetricsAnalyzer metricsAnalyzer;
+    public float queueTime = 0f;
 
 
 
@@ -38,6 +40,7 @@ public class ClientBehaviour : MonoBehaviour
         waitPos = GameObject.Find("WaitPos").transform;
         destroyerPos = GameObject.Find("DestroyerPos").transform;
         timeToWait = normalDistribution.GenerateRandomValue();
+        metricsAnalyzer = GameObject.Find("Metrics").GetComponent<MetricsAnalyzer>();
 
         StartCoroutine(QueueWait());
     }
@@ -124,6 +127,7 @@ public class ClientBehaviour : MonoBehaviour
 
     IEnumerator WaitOnBox()
     {
+        metricsAnalyzer.waitBoxes.Add((float)timeToWait);
         yield return new WaitForSeconds((float)timeToWait);
         // Set the box to be activated
         targetBox.GetComponent<BoxBehaviour>().isActivated = true;
@@ -146,6 +150,7 @@ public class ClientBehaviour : MonoBehaviour
 
     IEnumerator QueueWait()
     {
+        float initWaitTime = Time.fixedTime;
         yield return new WaitForSeconds(30);
         if (isOnWaitPos == false && isOnBox == false)
         {
@@ -153,5 +158,9 @@ public class ClientBehaviour : MonoBehaviour
             gameManager.lostClients++;
             gameManager.clientCounter--;
         }
+        float finalWaitTime = Time.fixedTime;
+        queueTime = finalWaitTime - initWaitTime;
+        metricsAnalyzer.waitTimes.Add(queueTime);
+
     }
 }
