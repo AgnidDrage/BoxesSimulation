@@ -154,6 +154,8 @@ MonoBehaviour:
   isOnBox: 0
   targetBox: {fileID: 0}
   timeToWait: 0
+  metricsAnalyzer: {fileID: 0}
+  queueTime: 0
 --- !u!1 &1480329942699148906
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,4 +222,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.3
+  m_Radius: 0.5

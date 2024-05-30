@@ -67,13 +67,13 @@ public class EndgameManager : MonoBehaviour
         totalClientsText.text = "Clientes totales: " + totalClients.ToString();
         lostClientsText.text = "Clientes perdidos: " + lostClients.ToString();
         assistedClientsText.text = "Clientes asistidos: " + assistedClients.ToString();
-        totalMoneyBoxText.text = "Dinero cajas perdido: " + totalMoneyBox.ToString();
-        totalMoneyLostClientText.text = "Dinero clientes perdido: " + totalMoneyLostClient.ToString();
-        totalMoneyText.text = "Dinero total: " + totalMoney.ToString() + "$";
-        maxQueueTimeText.text = "Tiempo maximo cola: " + maxQueueTime.ToString()+ "$";
-        minQueueTimeText.text = "Tiempo minimo cola: " + minQueueTime.ToString()+ "$";
-        maxBoxesTimeText.text = "Tiempo maximo cajas: " + maxBoxesTime.ToString()+ "$";
-        minBoxesTimeText.text = "Tiempo minimo cajas: " + minBoxesTime.ToString()+ "$";
+        totalMoneyBoxText.text = "Dinero cajas perdido: " + totalMoneyBox.ToString("0.00") + "$";
+        totalMoneyLostClientText.text = "Dinero clientes perdido: " + totalMoneyLostClient.ToString("0.00") + "$";
+        totalMoneyText.text = "Dinero total: " + totalMoney.ToString("0.00") + "$";
+        maxQueueTimeText.text = "Tiempo maximo cola: " + maxQueueTime.ToString("0.00") + "min";
+        minQueueTimeText.text = "Tiempo minimo cola: " + minQueueTime.ToString("0.00") + "min";
+        maxBoxesTimeText.text = "Tiempo maximo cajas: " + maxBoxesTime.ToString("0.00") + "min";
+        minBoxesTimeText.text = "Tiempo minimo cajas: " + minBoxesTime.ToString("0.00") + "min";
     }
 
     public void OnMenuButton()

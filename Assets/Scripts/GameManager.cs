@@ -104,13 +104,7 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 2;
                 break;
             case 2:
-                Time.timeScale = 3;
-                break;
-            case 3:
                 Time.timeScale = 4;
-                break;
-            case 4:
-                Time.timeScale = 5;
                 break;
         }
 
