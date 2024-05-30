@@ -151,24 +151,6 @@ public class ClientBehaviour : MonoBehaviour
 
     IEnumerator QueueWait()
     {
-        // float initWaitTime = Time.fixedTime;
-        // yield return new WaitForSeconds(30);
-        // if (isOnWaitPos == false && isOnBox == false)
-        // {
-        //     float finalWaitTime = Time.fixedTime;
-        //     queueTime = finalWaitTime - initWaitTime;
-        //     metricsAnalyzer.waitTimes.Add(queueTime);
-        //     gameManager.lostClients++;
-        //     gameManager.clientCounter--;
-        //     Destroy(gameObject);
-        // }
-        // else if (isOnWaitPos == true && isOnBox == false)
-        // {
-        //     float finalWaitTime = Time.fixedTime;
-        //     queueTime = finalWaitTime - initWaitTime;
-        //     metricsAnalyzer.waitTimes.Add(queueTime);
-        // }
-
         while (true)
         {
             yield return new WaitForSeconds(1);
