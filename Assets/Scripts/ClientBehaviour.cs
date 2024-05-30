@@ -15,12 +15,13 @@ public class ClientBehaviour : MonoBehaviour
     [SerializeField]
     public NormalDistribution normalDistribution;
     private bool isOnWaitPos = false;
+    private float waitCounter = 0f;
     [SerializeField]
     private bool isOnBox = false;
     [SerializeField]
     private GameObject targetBox;
     [SerializeField]
-    private double timeToWait;
+    private double timeToWait; // Time to wait on the box
     private bool timeToDie = false;
     public MetricsAnalyzer metricsAnalyzer;
     public float queueTime = 0f;
@@ -150,17 +151,42 @@ public class ClientBehaviour : MonoBehaviour
 
     IEnumerator QueueWait()
     {
-        float initWaitTime = Time.fixedTime;
-        yield return new WaitForSeconds(30);
-        if (isOnWaitPos == false && isOnBox == false)
+        // float initWaitTime = Time.fixedTime;
+        // yield return new WaitForSeconds(30);
+        // if (isOnWaitPos == false && isOnBox == false)
+        // {
+        //     float finalWaitTime = Time.fixedTime;
+        //     queueTime = finalWaitTime - initWaitTime;
+        //     metricsAnalyzer.waitTimes.Add(queueTime);
+        //     gameManager.lostClients++;
+        //     gameManager.clientCounter--;
+        //     Destroy(gameObject);
+        // }
+        // else if (isOnWaitPos == true && isOnBox == false)
+        // {
+        //     float finalWaitTime = Time.fixedTime;
+        //     queueTime = finalWaitTime - initWaitTime;
+        //     metricsAnalyzer.waitTimes.Add(queueTime);
+        // }
+
+        while (true)
         {
-            Destroy(gameObject);
-            gameManager.lostClients++;
-            gameManager.clientCounter--;
+            yield return new WaitForSeconds(1);
+            waitCounter++;
+            if (isOnWaitPos == false && isOnBox == false && waitCounter >= 30)
+            {
+                metricsAnalyzer.waitTimes.Add(waitCounter);
+                gameManager.lostClients++;
+                gameManager.clientCounter--;
+                Destroy(gameObject);
+            }
+            else if (isOnWaitPos == true && isOnBox == false)
+            {
+                metricsAnalyzer.waitTimes.Add(waitCounter);
+                break;
+            }
         }
-        float finalWaitTime = Time.fixedTime;
-        queueTime = finalWaitTime - initWaitTime;
-        metricsAnalyzer.waitTimes.Add(queueTime);
+        
 
     }
 }
