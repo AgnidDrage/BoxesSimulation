@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.ExceptionServices;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class ClientBehaviour : MonoBehaviour
@@ -12,6 +13,7 @@ public class ClientBehaviour : MonoBehaviour
     public CircleCollider2D cl;
     public BoxCollider2D bc;
     public GameManager gameManager;
+    private SpriteRenderer sr;
     [SerializeField]
     public NormalDistribution normalDistribution;
     private bool isOnWaitPos = false;
@@ -37,6 +39,7 @@ public class ClientBehaviour : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        sr = GetComponent<SpriteRenderer>();
         normalDistribution = GameObject.Find("NormalDist").GetComponent<NormalDistribution>();
         waitPos = GameObject.Find("WaitPos").transform;
         destroyerPos = GameObject.Find("DestroyerPos").transform;
@@ -155,6 +158,10 @@ public class ClientBehaviour : MonoBehaviour
         {
             yield return new WaitForSeconds(1);
             waitCounter++;
+            // Change color to red a little
+            Color actualColor = sr.color;
+            sr.color = new Color(actualColor.r, actualColor.g - 0.03f, actualColor.b - 0.03f, actualColor.a);
+
             if (isOnWaitPos == false && isOnBox == false && waitCounter >= 30)
             {
                 metricsAnalyzer.waitTimes.Add(waitCounter);

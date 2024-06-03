@@ -116,6 +116,7 @@ public class GameManager : MonoBehaviour
         if (Random.value <= 0.358)
         {
             clientCounter++;
+            totalClients++;
             Instantiate(client, spawnPoint.position, Quaternion.identity);
         }
     }
