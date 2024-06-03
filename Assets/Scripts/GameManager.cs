@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     public int totalClients = 0;
     public int clientCounter = 0;
     public MetricsAnalyzer metricsAnalyzer;
+    public NormalDistribution spawnDistribution;
+    [SerializeField] private double spawnProbability;
 
     // Start is called before the first frame update
     IEnumerator Start()
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitUntil(() => boxManager.IsInitialized == true);
 
         boxesToActivate = boxManager.getBoxes(amountOfBoxes);
+
 
         foreach (GameObject box in boxesToActivate)
         {
@@ -72,6 +75,7 @@ public class GameManager : MonoBehaviour
         // Spawn time management
         if (tempCounter <= 0f && isOpen)  //check if the counter equals 0
         {
+            spawnProbability = spawnDistribution.getClientSpawnProbability();
             SpawnEnemy();  //spawn the object
             tempCounter = spawnTime;  //reset the timer or cd
         }
@@ -113,7 +117,7 @@ public class GameManager : MonoBehaviour
     private void SpawnEnemy()  //Spawn object (Enemy) function
     {
 
-        if (Random.value <= 0.358)
+        if (spawnProbability < 600 + 15.49f && spawnProbability > 600 - 15.49f)
         {
             clientCounter++;
             totalClients++;

@@ -478,6 +478,8 @@ MonoBehaviour:
   totalClients: 0
   clientCounter: 0
   metricsAnalyzer: {fileID: 54828237}
+  spawnDistribution: {fileID: 718931899}
+  spawnProbability: 0
 --- !u!4 &251043220
 Transform:
   m_ObjectHideFlags: 0
