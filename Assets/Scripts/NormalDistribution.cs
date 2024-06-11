@@ -13,7 +13,7 @@ public class NormalDistribution : MonoBehaviour
         double mean = 10.0;
         double std = 5.0;
         waitboxDistribution = new Normal(mean, std);
-        spawnClientDistribution = new Normal(600, 15.49f);
+        spawnClientDistribution = new Normal(120, 60f);
 
     }
 
@@ -27,13 +27,8 @@ public class NormalDistribution : MonoBehaviour
         return value;
     }
 
-    public double getClientSpawnProbability()
+    public double getClientSpawnProbability(float simTime)
     {
-        double value = spawnClientDistribution.Sample(); // Obtener un valor aleatorio de la distribución normal
-        if (value < 0) // Si el valor es negativo, convertirlo a positivo
-        {
-            value *= -1;
-        }
-        return value;
+        return spawnClientDistribution.Density(simTime) * 150; // Obtener la probabilidad de que un cliente llegue en un tiempo determinado
     }
 }

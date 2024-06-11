@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
         // Spawn time management
         if (tempCounter <= 0f && isOpen)  //check if the counter equals 0
         {
-            spawnProbability = spawnDistribution.getClientSpawnProbability();
+            spawnProbability = spawnDistribution.getClientSpawnProbability(timeRemanining);
             SpawnEnemy();  //spawn the object
             tempCounter = spawnTime;  //reset the timer or cd
         }
@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
     private void SpawnEnemy()  //Spawn object (Enemy) function
     {
 
-        if (spawnProbability < 600 + 15.49f && spawnProbability > 600 - 15.49f)
+        if (Random.value < spawnProbability)  //check if the random value is less than the spawn probability
         {
             clientCounter++;
             totalClients++;
